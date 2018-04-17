@@ -10,7 +10,18 @@ import {
     <input id="test" type="text" (input)="onChange($event.target.value)" (blur)="onTouched()" [disabled]="disabled" />
     <p class="error" *ngIf="control_dir && !control_dir.control.valid">This field is required.</p>
     `,
-    styles: [],
+    styles: [`
+    :host {
+        display: flex;
+        flex-direction: row;
+        height: 40px;
+    }
+    .error {
+        color: red;
+        margin: 0 0 0 8px;
+        line-height: 40px;
+    }
+    `],
     providers: [
         //{ provide: NG_VALUE_ACCESSOR, useExisting: RequiredTextComponent, multi: true } //=> These are required by ngControl
         //{ provide: NG_VALIDATORS, useExisting: RequiredTextComponent, multi: true } //=> Avoid circular dependency

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Self } from '@angular/core';
+import { Component, OnDestroy, Self } from '@angular/core';
 import { ControlValueAccessor, FormGroup, FormControl, NgModel, NgControl } from "@angular/forms";
 
 import { Subscription } from "rxjs/Subscription";
@@ -13,20 +13,17 @@ import { Subscription } from "rxjs/Subscription";
     `,
     styles: []
 })
-export class AddressCompositeFormComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class AddressCompositeFormComponent implements OnDestroy, ControlValueAccessor {
 
     form_group = new FormGroup({
-        street: new FormControl(),
-        city: new FormControl()
+        street: new FormControl(""),
+        city: new FormControl("")
     });
 
     private form_changes_subscription_: Subscription;
 
     constructor(@Self() public control_dir: NgControl) {
         this.control_dir.valueAccessor = this;
-    };
-
-    ngOnInit() {
     };
 
     onTouched: (value: any) => void;

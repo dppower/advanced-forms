@@ -3,26 +3,29 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-root',
-    template: ` 
-    <required-text [formControl]="name_input"></required-text>   
-    <form [formGroup]="address_form_group">         
-        <address-composite-form formControlName="address"></address-composite-form>
-    </form>
-    <form #f="ngForm"> 
-        <p>{{f.value | json}}</p>       
-        <address-composite-form ngModel name="address"></address-composite-form>
-    </form>
-    <form #sf="ngForm">
-        <p>{{sf.value | json}}</p>
-        <template-sub-form></template-sub-form>
-    </form>
-    <form [formGroup]="reactive_sub_form_group">         
-        <reactive-sub-form></reactive-sub-form>
-    </form>
-    `,
-    styles: []
+    templateUrl: "app.component.html",
+    styles: [`
+    :host {
+        margin-left: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-section {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+    }
+    .nested-form {
+        display: flex;
+    }
+    .form-value {
+        margin-left: 1rem;
+        margin-bottom: 0;
+    }
+    `]
 })
 export class AppComponent {
+
     name_input = new FormControl();
 
     address_form_group = new FormGroup({

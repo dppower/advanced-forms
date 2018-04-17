@@ -20,11 +20,11 @@ export class ReactiveSubFormComponent implements OnInit {
 
     constructor(private parent_form_group_: FormGroupDirective) { };
 
-    ngOnInit() {       
+    ngOnInit() {
         this.form_group = this.parent_form_group_.form;
         this.form_group.addControl("address", new FormGroup({
-            "street": new FormControl(),
-            "city": new FormControl()
+            "street": new FormControl(""),
+            "city": new FormControl("")
         }));
     };
 }
