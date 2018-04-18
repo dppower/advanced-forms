@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Self } from '@angular/core';
+import { Component, OnDestroy, Self, AfterViewInit, Optional } from '@angular/core';
 import { ControlValueAccessor, FormGroup, FormControl, NgModel, NgControl } from "@angular/forms";
 
 import { Subscription } from "rxjs/Subscription";
@@ -13,7 +13,7 @@ import { Subscription } from "rxjs/Subscription";
     `,
     styles: []
 })
-export class AddressCompositeFormComponent implements OnDestroy, ControlValueAccessor {
+export class AddressCompositeFormComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
 
     form_group = new FormGroup({
         street: new FormControl(""),
@@ -22,11 +22,15 @@ export class AddressCompositeFormComponent implements OnDestroy, ControlValueAcc
 
     private form_changes_subscription_: Subscription;
 
-    constructor(@Self() public control_dir: NgControl) {
+    constructor(@Optional() @Self() public control_dir: NgControl) {
         this.control_dir.valueAccessor = this;
     };
 
-    onTouched: (value: any) => void;
+    ngAfterViewInit() {
+        setInterval(() => this.form_group.updateValueAndValidity(), 0);
+    };
+
+    onTouched: (value?: any) => void;
 
     writeValue(value: any) {
         // Set the value programmatically, so don't want to emit a value change event
@@ -46,6 +50,6 @@ export class AddressCompositeFormComponent implements OnDestroy, ControlValueAcc
     };
 
     ngOnDestroy() {
-        this.form_changes_subscription_.unsubscribe();
+        this.form_changes_subscription_ && this.form_changes_subscription_.unsubscribe();
     };
 }

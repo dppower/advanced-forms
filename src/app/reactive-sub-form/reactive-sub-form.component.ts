@@ -14,7 +14,7 @@ import { ControlContainer, FormGroupDirective, FormGroup, FormControl } from "@a
         { provide: ControlContainer, useExisting: FormGroupDirective }
     ]
 })
-export class ReactiveSubFormComponent implements OnInit {
+export class ReactiveSubFormComponent implements OnInit, AfterViewInit {
 
     form_group: FormGroup;
 
@@ -25,6 +25,10 @@ export class ReactiveSubFormComponent implements OnInit {
         this.form_group.addControl("address", new FormGroup({
             "street": new FormControl(""),
             "city": new FormControl("")
-        }));
+        }));        
+    };
+
+    ngAfterViewInit() {
+        this.form_group.updateValueAndValidity();
     };
 }

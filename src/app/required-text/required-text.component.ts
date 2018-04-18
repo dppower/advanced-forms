@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Self } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Self, Optional } from '@angular/core';
 import { 
     ControlValueAccessor, Validator, AbstractControl, Validators, 
     NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl 
@@ -33,12 +33,12 @@ export class RequiredTextComponent implements OnInit, ControlValueAccessor, Vali
 
     onChange: (value: any) => void;
 
-    onTouched: (value: any) => void;
+    onTouched: (value?: any) => void;
 
     disabled: boolean;
 
     constructor(
-        @Self() public control_dir: NgControl, private element_ref_: ElementRef
+        @Optional() @Self() public control_dir: NgControl, private element_ref_: ElementRef
     ) { 
         this.control_dir.valueAccessor = this;
     };
